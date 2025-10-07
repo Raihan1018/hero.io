@@ -1,9 +1,105 @@
-import React from 'react'
+import React, { useState } from "react";
+import { IoIosStar, IoMdDownload } from "react-icons/io";
+import { CiSearch } from "react-icons/ci";
+import { useLoaderData } from "react-router-dom";
+import SectionBlock from "../../components/UI/SectionBlock/SectionBlock";
 
 const Apps = () => {
-  return (
-    <div>Apps</div>
-  )
-}
+  const data = useLoaderData();
+  const [searchTerm, setSearchTerm] = useState("");
 
-export default Apps
+  // Format large numbers into K, M, B
+  const formatNumber = (num) => {
+    if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
+    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
+    if (num >= 1_000) return (num / 1_000).toFixed(1) + "K";
+    return num;
+  };
+
+  // Show spinner if data not loaded or empty
+  if (!data || data.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center h-64">
+        <div className="w-12 h-12 border-4 border-purple-300 border-t-purple-600 rounded-full animate-spin"></div>
+        <p className="flex justify-center items-center min-h-screen">
+          Loading...
+        </p>
+      </div>
+    );
+  }
+
+  // Filter apps based on search term
+  const filteredApps = data.filter(
+    (app) =>
+      app.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      app.companyName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div>
+      <SectionBlock
+        title={"Our All Applications"}
+        subTitle={
+          "Explore All Apps on the Market developed by us. We code for Millions"
+        }
+      />
+
+      <div className="flex justify-between items-center px-5 mb-4">
+        <h1 className="font-semibold text-lg">
+          Total Apps: {filteredApps.length}
+        </h1>
+
+        <div className="relative w-full max-w-xs">
+          <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl" />
+          <input
+            type="text"
+            placeholder="Search apps..."
+            className="input input-bordered w-full pl-10 pr-3"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+
+      {filteredApps.length === 0 ? (
+        <p className="text-center text-gray-500 text-2xl mt-20">No apps found</p>
+      ) : (
+        <div className="grid grid-cols-4 gap-4 justify-center items-center mx-auto p-3">
+          {filteredApps.map((app, index) => {
+            const totalRatings =
+              app.ratings?.reduce((sum, rating) => sum + rating.count, 0) || 0;
+
+            return (
+              <div
+                key={index}
+                className="card card-compact bg-base-100 shadow-xl p-3 hover:-translate-y-2 transition-all ease-in-out duration-200"
+              >
+                <figure>
+                  <img src={app.image} alt={app.title} />
+                </figure>
+
+                <div className="flex items-center justify-between py-3">
+                  <h2 className="font-semibold">{app.title}</h2>
+                  <p className="text-sm text-gray-500">{app.companyName}</p>
+                </div>
+
+                <div className="flex justify-between items-center gap-4 text-gray-600 text-sm">
+                  <span className="flex items-center gap-1 text-green-600 bg-green-100 p-2 rounded-md">
+                    <IoMdDownload />
+                    {formatNumber(app.downloads)}
+                  </span>
+                  <span className="flex items-center gap-1 text-orange-600 bg-orange-100 p-2 rounded-md">
+                    <IoIosStar />
+                    {formatNumber(totalRatings)}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Apps;

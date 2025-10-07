@@ -1,10 +1,10 @@
 [
   {
     "image": "https://cdn-icons-png.flaticon.com/128/3536/3536445.png",
-    "title": "WhatsApp Messenger",
+    "title": "WhatsApp",
     "companyName": "Meta Platforms, Inc.",
     "id": 1,
-    "description": "WhatsApp Messenger is one of the most widely used messaging apps in the world, designed to provide fast, secure, and reliable communication. It allows users to send text messages, voice messages, images, videos, and documents instantly to individuals or groups, without incurring traditional SMS charges. WhatsApp also supports voice and video calls, enabling real-time conversations globally. End-to-end encryption ensures that messages and calls remain private and accessible only to the sender and recipient. Additional features include status updates, location sharing, file transfers, and group chats, making it suitable for both personal and professional use. With WhatsApp Web and desktop apps, users can seamlessly continue conversations across multiple devices. The app also integrates business profiles, payment features, and interactive group tools, ensuring a versatile platform that continues to evolve with user needs, offering simplicity and convenience in everyday communication.",
+    "description": "WhatsApp  is one of the most widely used messaging apps in the world, designed to provide fast, secure, and reliable communication. It allows users to send text messages, voice messages, images, videos, and documents instantly to individuals or groups, without incurring traditional SMS charges. WhatsApp also supports voice and video calls, enabling real-time conversations globally. End-to-end encryption ensures that messages and calls remain private and accessible only to the sender and recipient. Additional features include status updates, location sharing, file transfers, and group chats, making it suitable for both personal and professional use. With WhatsApp Web and desktop apps, users can seamlessly continue conversations across multiple devices. The app also integrates business profiles, payment features, and interactive group tools, ensuring a versatile platform that continues to evolve with user needs, offering simplicity and convenience in everyday communication.",
     "size": 35,
     "reviews": 5000000,
     "ratingAvg": 4.5,
@@ -162,7 +162,7 @@
     ]
   },
   {
-    "image": "hthttps://cdn-icons-png.flaticon.com/128/2875/2875433.png",
+    "image": "https://cdn-icons-png.flaticon.com/128/2875/2875433.png",
     "title": "Google Maps",
     "companyName": "Google LLC",
     "id": 10,
