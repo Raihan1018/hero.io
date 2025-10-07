@@ -34,7 +34,7 @@ const AllApps = ({ data }) => {
         />
       </div>
 
-      <div className="grid grid-cols-4 gap-4 justify-center items-center mx-auto p-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center items-center mx-auto p-3">
         {data.slice(0, 8).map((app, index) => {
           const totalRatings =
             app.ratings?.reduce((sum, rating) => sum + rating.count, 0) || 0;
