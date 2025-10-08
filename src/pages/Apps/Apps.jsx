@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosStar, IoMdDownload } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import SectionBlock from "../../components/UI/SectionBlock/SectionBlock";
 
 const Apps = () => {
   const data = useLoaderData();
   const [searchTerm, setSearchTerm] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [filteredApps, setFilteredApps] = useState(data); // ✅ fixed typo
 
   // Format large numbers into K, M, B
   const formatNumber = (num) => {
@@ -16,7 +18,7 @@ const Apps = () => {
     return num;
   };
 
-  // Show spinner if data not loaded or empty
+  // Show spinner if data not loaded
   if (!data || data.length === 0) {
     return (
       <div className="flex flex-col justify-center items-center h-64">
@@ -28,12 +30,21 @@ const Apps = () => {
     );
   }
 
-  // Filter apps based on search term
-  const filteredApps = data.filter(
-    (app) =>
-      app.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.companyName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Add small delay when typing to show loading animation
+  useEffect(() => {
+    setIsSearching(true);
+    const timer = setTimeout(() => {
+      const filtered = data.filter(
+        (app) =>
+          app.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          app.companyName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredApps(filtered);
+      setIsSearching(false);
+    }, 400); // small delay for smooth feel
+
+    return () => clearTimeout(timer);
+  }, [searchTerm, data]);
 
   return (
     <div>
@@ -61,7 +72,12 @@ const Apps = () => {
         </div>
       </div>
 
-      {filteredApps.length === 0 ? (
+      {isSearching ? (
+        <div className="flex flex-col justify-center items-center h-40">
+          <div className="w-10 h-10 border-4 border-purple-300 border-t-purple-600 rounded-full animate-spin"></div>
+          <p className="mt-3 text-gray-500">Searching...</p>
+        </div>
+      ) : filteredApps.length === 0 ? (
         <p className="text-center text-gray-500 text-2xl mt-20">
           No apps found
         </p>
@@ -72,30 +88,29 @@ const Apps = () => {
               app.ratings?.reduce((sum, rating) => sum + rating.count, 0) || 0;
 
             return (
-              <div
-                key={index}
-                className="card card-compact bg-base-100 shadow-xl p-3 hover:-translate-y-2 transition-all ease-in-out duration-200"
-              >
-                <figure>
-                  <img src={app.image} alt={app.title} />
-                </figure>
+              <Link key={index} to={`../app-details/${app.id}`}>
+                <div className="card card-compact bg-base-100 shadow-xl p-3 hover:-translate-y-2 transition-all ease-in-out duration-200">
+                  <figure>
+                    <img src={app.image} alt={app.title} />
+                  </figure>
 
-                <div className="flex items-center justify-between py-3">
-                  <h2 className="font-semibold">{app.title}</h2>
-                  <p className="text-sm text-gray-500">{app.companyName}</p>
-                </div>
+                  <div className="flex items-center justify-between py-3">
+                    <h2 className="font-semibold">{app.title}</h2>
+                    <p className="text-sm text-gray-500">{app.companyName}</p>
+                  </div>
 
-                <div className="flex justify-between items-center gap-4 text-gray-600 text-sm">
-                  <span className="flex items-center gap-1 text-green-600 bg-green-100 p-2 rounded-md">
-                    <IoMdDownload />
-                    {formatNumber(app.downloads)}
-                  </span>
-                  <span className="flex items-center gap-1 text-orange-600 bg-orange-100 p-2 rounded-md">
-                    <IoIosStar />
-                    {formatNumber(totalRatings)}
-                  </span>
+                  <div className="flex justify-between items-center gap-4 text-gray-600 text-sm">
+                    <span className="flex items-center gap-1 text-green-600 bg-green-100 p-2 rounded-md">
+                      <IoMdDownload />
+                      {formatNumber(app.downloads)}
+                    </span>
+                    <span className="flex items-center gap-1 text-orange-600 bg-orange-100 p-2 rounded-md">
+                      <IoIosStar />
+                      {formatNumber(totalRatings)}
+                    </span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

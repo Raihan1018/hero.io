@@ -34,14 +34,16 @@ const AllApps = ({ data }) => {
         />
       </div>
 
+      {/* Grid Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center items-center mx-auto p-3">
-        {data.slice(0, 8).map((app, index) => {
+        {data.slice(0, 8).map((app) => {
           const totalRatings =
             app.ratings?.reduce((sum, rating) => sum + rating.count, 0) || 0;
 
           return (
-            <div
-              key={index}
+            <Link
+              key={app.id}
+              to={`../app-details/${app.id}`}
               className="card card-compact bg-base-100 shadow-xl p-3 hover:-translate-y-2 transition-all ease-in-out duration-200"
             >
               <figure>
@@ -63,12 +65,13 @@ const AllApps = ({ data }) => {
                   {formatNumber(totalRatings)}
                 </span>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
 
-      <Link to= "/apps" className="flex justify-center py-5">
+      {/* Show All Button */}
+      <Link to="/apps" className="flex justify-center py-5">
         <Button text="Show All" />
       </Link>
     </div>

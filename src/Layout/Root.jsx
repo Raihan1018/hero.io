@@ -1,16 +1,28 @@
 import React from "react";
-import Home from "../pages/Home/Home";
+import { Outlet, useNavigation } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import { Outlet } from "react-router-dom";
 
 const Root = () => {
+  const navigation = useNavigation();
+  const isPageLoading = navigation.state === "loading";
+
   return (
-    <div className="font-inter container max-w-screen-2xl mx-auto">
+    <div className="font-inter container max-w-screen-2xl mx-auto min-h-screen flex flex-col">
       <Header />
-      <div className="bg-base-300">
+
+      {/* Page transition loader — same style as search animation */}
+      {isPageLoading && (
+        <div className="flex flex-col justify-center items-center absolute inset-0 bg-base-300/60 z-50 backdrop-blur-sm">
+          <div className="w-12 h-12 border-4 border-purple-300 border-t-purple-600 rounded-full animate-spin"></div>
+          <p className="mt-3 text-gray-600 text-8xl font-medium">Loading...</p>
+        </div>
+      )}
+
+      <div className="flex-1 bg-base-300">
         <Outlet />
       </div>
+
       <Footer />
     </div>
   );

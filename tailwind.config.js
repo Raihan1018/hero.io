@@ -6,6 +6,15 @@ export default {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
+      keyframes: {
+        shine: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
+      animation: {
+        shine: "shine 2s linear infinite",
+      },
     },
   },
   plugins: [require("daisyui")],
