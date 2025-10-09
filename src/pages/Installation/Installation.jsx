@@ -7,9 +7,9 @@ import ratingIcon from "../../assets/icon-ratings.png";
 import reviewIcon from "../../assets/icon-review.png";
 
 const Installation = () => {
-  const data = useLoaderData(); 
+  const data = useLoaderData();
   const [installedApps, setInstalledApps] = useState([]);
-  const [sortOrder, setSortOrder] = useState(""); 
+  const [sortOrder, setSortOrder] = useState("");
 
   const formatNumber = (num) => {
     if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
@@ -58,13 +58,14 @@ const Installation = () => {
         />
       </div>
 
-      <div className="flex justify-between items-center mb-4">
-        <h2>
-          <span>{installedApps.length}</span> Apps Found
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2 sm:gap-0">
+        <h2 className="text-lg sm:text-xl font-semibold">
+          <span className="text-purple-600">{installedApps.length}</span> Apps
+          Found
         </h2>
 
         <select
-          className="select select-bordered w-full max-w-xs"
+          className="select select-bordered w-full sm:w-auto max-w-xs"
           onChange={handleSort}
           value={sortOrder}
         >
@@ -121,7 +122,6 @@ const Installation = () => {
               </div>
             </div>
 
-            
             <button
               onClick={() => handleUninstall(app.id)}
               className="btn btn-success btn-sm"

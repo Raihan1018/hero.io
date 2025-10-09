@@ -15,6 +15,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import AppNotFound from "../AppNotFound/AppNotFound";
+import Button from "../../components/UI/Button/Button";
 
 const AppDetails = () => {
   const { id } = useParams();
@@ -187,15 +188,6 @@ const AppDetails = () => {
           {description}
         </p>
       </div>
-
-      {/* <div className="flex justify-start mt-6 sm:mt-10">
-        <Link
-          to="/"
-          className="inline-block bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl hover:opacity-90 transition text-sm sm:text-base"
-        >
-          ← Back to Apps
-        </Link>
-      </div> */}
     </div>
   );
 };
