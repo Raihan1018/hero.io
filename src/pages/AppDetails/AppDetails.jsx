@@ -87,7 +87,6 @@ const AppDetails = () => {
             <span className="text-[#632EE3] font-medium">{companyName}</span>
           </p>
 
-       
           <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-3">
             <div className="flex flex-col items-center gap-1">
               <img
@@ -123,7 +122,6 @@ const AppDetails = () => {
             </div>
           </div>
 
-        
           <button
             onClick={handleInstall}
             disabled={isInstalled}
@@ -144,7 +142,6 @@ const AppDetails = () => {
         </div>
       </div>
 
-      
       <div className="mt-8 sm:mt-10 bg-base-100 p-4 sm:p-6 rounded-md shadow-md">
         <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-5 text-[#632EE3]">
           Ratings
@@ -182,7 +179,6 @@ const AppDetails = () => {
 
       <div className="divider my-8 sm:my-10"></div>
 
-      
       <div className="mt-8 sm:mt-10 bg-base-100 p-4 sm:p-6 rounded-md shadow-md">
         <h2 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">
           Description
@@ -192,15 +188,14 @@ const AppDetails = () => {
         </p>
       </div>
 
-      
-      <div className="flex justify-start mt-6 sm:mt-10">
+      {/* <div className="flex justify-start mt-6 sm:mt-10">
         <Link
-          to="/apps"
+          to="/"
           className="inline-block bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl hover:opacity-90 transition text-sm sm:text-base"
         >
           ← Back to Apps
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };
