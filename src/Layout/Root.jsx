@@ -11,7 +11,6 @@ const Root = () => {
     <div className="font-inter container max-w-screen-2xl mx-auto min-h-screen flex flex-col">
       <Header />
 
-      {/* Page transition loader — same style as search animation */}
       {isPageLoading && (
         <div className="flex flex-col justify-center items-center absolute inset-0 bg-base-300/60 z-50 backdrop-blur-sm">
           <div className="w-12 h-12 border-4 border-purple-300 border-t-purple-600 rounded-full animate-spin"></div>

@@ -8,9 +8,8 @@ const Apps = () => {
   const data = useLoaderData();
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  const [filteredApps, setFilteredApps] = useState(data); // ✅ fixed typo
+  const [filteredApps, setFilteredApps] = useState(data);
 
-  // Format large numbers into K, M, B
   const formatNumber = (num) => {
     if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
     if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
@@ -18,7 +17,6 @@ const Apps = () => {
     return num;
   };
 
-  // Show spinner if data not loaded
   if (!data || data.length === 0) {
     return (
       <div className="flex flex-col justify-center items-center h-64">
@@ -30,7 +28,6 @@ const Apps = () => {
     );
   }
 
-  // Add small delay when typing to show loading animation
   useEffect(() => {
     setIsSearching(true);
     const timer = setTimeout(() => {
@@ -41,7 +38,7 @@ const Apps = () => {
       );
       setFilteredApps(filtered);
       setIsSearching(false);
-    }, 400); // small delay for smooth feel
+    }, 400);
 
     return () => clearTimeout(timer);
   }, [searchTerm, data]);

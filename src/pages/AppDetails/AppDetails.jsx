@@ -14,6 +14,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import AppNotFound from "../AppNotFound/AppNotFound";
 
 const AppDetails = () => {
   const { id } = useParams();
@@ -22,9 +23,10 @@ const AppDetails = () => {
 
   const [isInstalled, setIsInstalled] = useState(false);
 
-  // ✅ Check if already installed
+  // Check if already installed
   useEffect(() => {
-    const installedApps = JSON.parse(localStorage.getItem("installedApps")) || [];
+    const installedApps =
+      JSON.parse(localStorage.getItem("installedApps")) || [];
     setIsInstalled(installedApps.includes(app?.id));
   }, [app?.id]);
 
@@ -55,9 +57,10 @@ const AppDetails = () => {
     return num;
   };
 
-  // ✅ Handle Install click
+  // handle Install click
   const handleInstall = () => {
-    const installedApps = JSON.parse(localStorage.getItem("installedApps")) || [];
+    const installedApps =
+      JSON.parse(localStorage.getItem("installedApps")) || [];
     if (!installedApps.includes(app.id)) {
       installedApps.push(app.id);
       localStorage.setItem("installedApps", JSON.stringify(installedApps));
@@ -84,7 +87,7 @@ const AppDetails = () => {
             <span className="text-[#632EE3] font-medium">{companyName}</span>
           </p>
 
-          {/* Key Stats */}
+       
           <div className="flex flex-wrap items-center gap-4 sm:gap-6 mt-3">
             <div className="flex flex-col items-center gap-1">
               <img
@@ -120,7 +123,7 @@ const AppDetails = () => {
             </div>
           </div>
 
-          {/* Install Button */}
+        
           <button
             onClick={handleInstall}
             disabled={isInstalled}
@@ -141,7 +144,7 @@ const AppDetails = () => {
         </div>
       </div>
 
-      {/* Ratings Section */}
+      
       <div className="mt-8 sm:mt-10 bg-base-100 p-4 sm:p-6 rounded-md shadow-md">
         <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-5 text-[#632EE3]">
           Ratings
@@ -179,7 +182,7 @@ const AppDetails = () => {
 
       <div className="divider my-8 sm:my-10"></div>
 
-      {/* About Section */}
+      
       <div className="mt-8 sm:mt-10 bg-base-100 p-4 sm:p-6 rounded-md shadow-md">
         <h2 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">
           Description
@@ -189,7 +192,7 @@ const AppDetails = () => {
         </p>
       </div>
 
-      {/* Footer Section */}
+      
       <div className="flex justify-start mt-6 sm:mt-10">
         <Link
           to="/apps"

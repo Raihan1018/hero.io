@@ -7,9 +7,9 @@ import ratingIcon from "../../assets/icon-ratings.png";
 import reviewIcon from "../../assets/icon-review.png";
 
 const Installation = () => {
-  const data = useLoaderData(); // all apps
+  const data = useLoaderData(); 
   const [installedApps, setInstalledApps] = useState([]);
-  const [sortOrder, setSortOrder] = useState(""); // "" | "low-high" | "high-low"
+  const [sortOrder, setSortOrder] = useState(""); 
 
   const formatNumber = (num) => {
     if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
@@ -121,7 +121,7 @@ const Installation = () => {
               </div>
             </div>
 
-            {/* Uninstall Button */}
+            
             <button
               onClick={() => handleUninstall(app.id)}
               className="btn btn-success btn-sm"
