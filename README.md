@@ -7,12 +7,13 @@ It’s fast ⚡, lightweight 🪶, and loaded with visual flair — from interac
 
 ## 🌐 Live Demo
 
-🔗 **Live Site (Cloudflare Pages):** [https://hero-io-4na.pages.dev](https://hero-io-4na.pages.dev)  
-🔗 **Live Site (Netlify):** [https://heroic-paletas-a02a64.netlify.app](https://heroic-paletas-a02a64.netlify.app)
+🔗 **Live Deployments**
 
-> 💡 Tip: Both links host the same app — pick your favorite platform to preview!
+- **Cloudflare Pages:** [hero-cp8.pages.dev](https://hero-cp8.pages.dev/)
+- **Netlify:** [strong-hotteok-59b6a4.netlify.app](https://strong-hotteok-59b6a4.netlify.app/)
+- **Vercel:** [hero-io-omega.vercel.app](https://hero-io-omega.vercel.app/)
 
----
+> 💡 **Tip:** All links host the same app — feel free to choose your favorite platform to preview!
 
 ## ✨ Features
 
