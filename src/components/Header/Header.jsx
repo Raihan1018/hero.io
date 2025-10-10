@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../UI/Button/Button";
 import { FaGithub } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
@@ -86,7 +85,6 @@ const Header = () => {
         <Link
           to={"https://github.com/Raihan1018"}
           target="blank"
-          className="btn"
         >
           <Button icon={FaGithub} text={"Contribute"} />
         </Link>

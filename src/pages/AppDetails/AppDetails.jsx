@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLoaderData, useParams, Link } from "react-router-dom";
-import { IoIosStar, IoMdDownload } from "react-icons/io";
+import { useLoaderData } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-import downloadIcon from "../../assets/icon-downloads.png";
-import ratingIcon from "../../assets/icon-ratings.png";
-import reviewIcon from "../../assets/icon-review.png";
 import {
   BarChart,
   Bar,
@@ -14,15 +10,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import AppNotFound from "../AppNotFound/AppNotFound";
-import Button from "../../components/UI/Button/Button";
+import ButtonLink from "../../components/UI/ButtonLink/ButtonLink";
+import downloadIcon from "../../assets/icon-downloads.png";
+import ratingIcon from "../../assets/icon-ratings.png";
+import reviewIcon from "../../assets/icon-review.png";
+import { formatNumber } from "../../utils/FormateNumber/FormateNumber";
 
 const AppDetails = () => {
-  const { id } = useParams();
-  const data = useLoaderData();
-  const app = data.find((item) => item.id === parseInt(id));
-
+  const app = useLoaderData();
   const [isInstalled, setIsInstalled] = useState(false);
+  const [isInstalling, setIsInstalling] = useState(false);
 
   // Check if already installed
   useEffect(() => {
@@ -30,14 +27,6 @@ const AppDetails = () => {
       JSON.parse(localStorage.getItem("installedApps")) || [];
     setIsInstalled(installedApps.includes(app?.id));
   }, [app?.id]);
-
-  if (!app) {
-    return (
-      <div className="flex justify-center items-center h-[60vh] text-xl font-semibold text-gray-600">
-        App not found!
-      </div>
-    );
-  }
 
   const {
     image,
@@ -51,30 +40,31 @@ const AppDetails = () => {
     ratings,
   } = app;
 
-  const formatNumber = (num) => {
-    if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
-    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
-    if (num >= 1_000) return (num / 1_000).toFixed(1) + "K";
-    return num;
-  };
+  formatNumber();
 
-  // handle Install click
+  // Handle install
   const handleInstall = () => {
-    const installedApps =
-      JSON.parse(localStorage.getItem("installedApps")) || [];
-    if (!installedApps.includes(app.id)) {
-      installedApps.push(app.id);
-      localStorage.setItem("installedApps", JSON.stringify(installedApps));
-      setIsInstalled(true);
-      toast.success("App installed successfully!");
-    }
+    if (isInstalled || isInstalling) return;
+
+    setIsInstalling(true);
+
+    setTimeout(() => {
+      const installedApps =
+        JSON.parse(localStorage.getItem("installedApps")) || [];
+      if (!installedApps.includes(app.id)) {
+        installedApps.push(app.id);
+        localStorage.setItem("installedApps", JSON.stringify(installedApps));
+        setIsInstalled(true);
+        toast.success("App installed successfully!");
+      }
+      setIsInstalling(false);
+    }, 2000);
   };
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-5 py-8 sm:py-10 bg-base-300">
       <Toaster position="top-right" reverseOrder={false} />
 
-      {/* Header */}
       <div className="flex flex-col md:flex-row items-center md:items-start bg-base-100 rounded-2xl shadow-lg p-5 sm:p-6">
         <img
           src={image}
@@ -123,26 +113,35 @@ const AppDetails = () => {
             </div>
           </div>
 
+          {/* install button with Spinner... */}
           <button
             onClick={handleInstall}
-            disabled={isInstalled}
-            className={`relative inline-block overflow-hidden rounded-xl px-5 sm:px-6 py-2.5 sm:py-3 font-semibold text-base sm:text-lg shadow-md transition-transform duration-300 mt-5
+            disabled={isInstalled || isInstalling}
+            className={`relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-5 sm:px-6 py-2.5 sm:py-3 font-semibold text-base sm:text-lg shadow-md transition-transform duration-300 mt-5
               ${
                 isInstalled
                   ? "bg-gray-400 cursor-not-allowed text-white"
                   : "bg-[#00D390] text-white hover:scale-105"
               }`}
           >
-            <span className="relative z-10">
-              {isInstalled ? "Installed" : `Install Now (${size} MB)`}
-            </span>
-            {!isInstalled && (
+            {isInstalling ? (
+              <>
+                <span className="h-5 w-5 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+                Installing...
+              </>
+            ) : (
+              <span className="relative z-10">
+                {isInstalled ? "Installed" : `Install Now (${size} MB)`}
+              </span>
+            )}
+            {!isInstalled && !isInstalling && (
               <span className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/60 to-transparent animate-shine"></span>
             )}
           </button>
         </div>
       </div>
 
+      {/* Ratings Chart */}
       <div className="mt-8 sm:mt-10 bg-base-100 p-4 sm:p-6 rounded-md shadow-md">
         <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-5 text-[#632EE3]">
           Ratings
@@ -180,6 +179,7 @@ const AppDetails = () => {
 
       <div className="divider my-8 sm:my-10"></div>
 
+      {/* Description */}
       <div className="mt-8 sm:mt-10 bg-base-100 p-4 sm:p-6 rounded-md shadow-md">
         <h2 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3">
           Description
@@ -188,6 +188,8 @@ const AppDetails = () => {
           {description}
         </p>
       </div>
+
+      <ButtonLink to="/apps" text={"Go Back"} />
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Banner = () => {
       <div className="hero bg-base-200 ">
         <div className=" text-center">
           <div>
-            <h1 className=" text-2xl md:text-3xl lg:text-5xl font-bold">
+            <h1 className=" text-2xl md:text-3xl lg:text-5xl font-bold mt-5 md:mt-20 lg:mt-28 md:mb-5">
               We Build <br />{" "}
               <span className="bg-gradient-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent font-bold">
                 Productive
@@ -54,7 +54,6 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      {/* Banner state */}
       <BannerState />
     </div>
   );

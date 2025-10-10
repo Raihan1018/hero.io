@@ -5,6 +5,10 @@ import Apps from "../pages/Apps/Apps";
 import Installation from "../pages/Installation/Installation";
 import AppDetails from "../pages/AppDetails/AppDetails";
 import PageError from "../pages/PageError/PageError";
+import AppNotFound from "../pages/AppNotFound/AppNotFound";
+import { appDetailsLoader } from "../utils/appDetailsLoader/appDetailsLoader";
+
+appDetailsLoader();
 
 export const router = createBrowserRouter([
   {
@@ -15,22 +19,27 @@ export const router = createBrowserRouter([
       {
         path: "/",
         Component: Home,
-        loader: () => fetch("./data.json"),
+        loader: () => fetch("../data.json"),
       },
       {
         path: "/apps",
         Component: Apps,
-        loader: () => fetch("./data.json"),
+        loader: () => fetch("../data.json"),
       },
       {
         path: "/app-details/:id",
         Component: AppDetails,
-        loader: () => fetch("./data.json"),
+        loader: appDetailsLoader,
+        errorElement: <AppNotFound />,
       },
       {
         path: "/installation",
         Component: Installation,
-        loader: () => fetch("./data.json"),
+        loader: () => fetch("../data.json"),
+      },
+      {
+        path: "*",
+        Component: PageError,
       },
     ],
   },

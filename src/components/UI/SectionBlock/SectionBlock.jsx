@@ -1,7 +1,6 @@
-
 const SectionBlock = ({ title, subTitle }) => {
   return (
-    <div className="text-center space-y-3">
+    <div className="text-center space-y-3 my-2 md:my-4 lg lg:my-8">
       <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold">{title}</h1>
       <p className="text-[#627382]">{subTitle}</p>
     </div>

@@ -2,14 +2,11 @@ import React from "react";
 import SectionBlock from "../../components/UI/SectionBlock/SectionBlock";
 import pageErrorImg from "../../assets/pageError.png";
 import Button from "../../components/UI/Button/Button";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import { Link } from "react-router-dom";
 
 const PageError = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
 
       <div className="flex flex-col items-center justify-center flex-1 bg-gray-100 p-6">
         <div className="w-full max-w-md mb-6">
@@ -37,7 +34,6 @@ const PageError = () => {
         </div>
       </div>
 
-      <Footer />
     </div>
   );
 };

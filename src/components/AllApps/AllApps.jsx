@@ -4,15 +4,11 @@ import Button from "../UI/Button/Button";
 import { HashLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import AppNotFound from "../../pages/AppNotFound/AppNotFound"; // import AppNotFound
+import { formatNumber } from "../../utils/FormateNumber/FormateNumber";
 
 const AllApps = ({ data }) => {
-  const formatNumber = (num) => {
-    if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
-    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
-    if (num >= 1_000) return (num / 1_000).toFixed(1) + "K";
-    return num;
-  };
-
+  
+  formatNumber();
   if (!data || data.length === 0) {
     return (
       <div className="flex flex-col justify-center items-center h-64">
@@ -24,8 +20,6 @@ const AllApps = ({ data }) => {
     );
   }
 
-  
-
   return (
     <div>
       <div className="py-5">
@@ -35,7 +29,6 @@ const AllApps = ({ data }) => {
         />
       </div>
 
-     
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center items-center mx-auto p-3">
         {data.slice(0, 8).map((app) => {
           const totalRatings =
@@ -71,7 +64,6 @@ const AllApps = ({ data }) => {
         })}
       </div>
 
-      
       <Link to="/apps" className="flex justify-center py-5">
         <Button text="Show All" />
       </Link>

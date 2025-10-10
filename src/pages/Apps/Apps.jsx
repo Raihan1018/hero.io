@@ -3,6 +3,7 @@ import { IoIosStar, IoMdDownload } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { Link, useLoaderData } from "react-router-dom";
 import SectionBlock from "../../components/UI/SectionBlock/SectionBlock";
+import ButtonLink from "../../components/UI/ButtonLink/ButtonLink";
 
 const Apps = () => {
   const data = useLoaderData();
@@ -85,7 +86,7 @@ const Apps = () => {
               app.ratings?.reduce((sum, rating) => sum + rating.count, 0) || 0;
 
             return (
-              <Link key={index} to={`../app-details/${app.id}`}>
+              <Link key={index} to={`/app-details/${app.id}`}>
                 <div className="card card-compact bg-base-100 shadow-xl p-3 hover:-translate-y-2 transition-all ease-in-out duration-200">
                   <figure>
                     <img src={app.image} alt={app.title} />
@@ -112,6 +113,7 @@ const Apps = () => {
           })}
         </div>
       )}
+      <ButtonLink to="/" text={"Go Back"}/>
     </div>
   );
 };
